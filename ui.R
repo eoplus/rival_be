@@ -153,6 +153,9 @@ fluidPage(
           "an inclusive program to add different processing codes, algorithms",
           "and sensors.</p>")
         ),
+        HTML(
+          "<p>The source code for this application is available <a href = https://github.com/AlexCast/rival_be>here</a>.</p>"
+        ),
         h4(tags$b("Contact")),
         tags$p(tags$a(href="mailto:alexandre.castagna@ugent.be", "Alexandre Castagna"))
       )
