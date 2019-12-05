@@ -21,14 +21,15 @@ fluidPage(
             h4(tags$b("Filters")),
             selectInput(inputId = "olci_prd", 
               label = "OLCI product", c("Chl a (OC4Me)", "Chl a (NN)", 
-              "SPM (NN)", "PAR", "Rrs(400)", "Rrs(412)", "Rrs(442)", "Rrs(490)",
-              "Rrs(510)", "Rrs(560)", "Rrs(620)", "Rrs(665)", "Rrs(674)", 
-              "Rrs(681)", "Rrs(709)", "Rrs(754)", "Rrs(779)", "Rrs(865)", 
-              "Rrs(885)", "Rrs(1020)"), selected = "Chl a (OC4Me)"
+              "SPM (NN)", "Turbidity", "PAR", "AOT(865)", "Rrs(400)", "Rrs(412)", 
+              "Rrs(442)", "Rrs(490)", "Rrs(510)", "Rrs(560)", "Rrs(620)", 
+              "Rrs(665)", "Rrs(674)", "Rrs(681)", "Rrs(709)", "Rrs(754)", 
+              "Rrs(779)", "Rrs(865)", "Rrs(885)", "Rrs(1020)"), 
+              selected = "Rrs(665)"
             ),
             selectInput(inputId = "olci_dtst", 
               label = "In situ dataset", c("All", "LifeWatch BE", "BMDC", 
-              "AERONET-OC"), selected = "All"
+              "AERONET-OC", "CEFAS SmartBuoys"), selected = "All"
             ),
             selectInput(inputId = "olci_spt", 
               label = "Spatial sampling", c("Center pixel", 
@@ -85,8 +86,8 @@ fluidPage(
             HTML(
               paste("<p>Additional OLCI processing to remove unmasked clouds and",
               "large sun glint made based on a threshold of R<sub>rs</sub>(1020)",
-              "> 0.01 sr. Note however that cloud shadows are apparent in OLCI",
-              "distributed products and are not remove in the current version.</p>")
+              "> 0.005 sr. Note however that cloud shadows are apparent in OLCI",
+              "distributed products and are not removed in the current version.</p>")
             ),
             HTML(
               paste("<p>AERONET-OC water leaving radiance converted to ",
@@ -123,6 +124,7 @@ fluidPage(
               "<li><a href = http://rshiny.lifewatch.be/station-data/>LifeWatch BE</a></li>",
               "<li><a href = http://www.bmdc.be/NODC/index.xhtml>BMDC</a></li>", 
               "<li><a href = https://aeronet.gsfc.nasa.gov/new_web/ocean_color.html>AERONET-OC</a> (Level 1.5)</li>",
+              "<li><a href = http://wavenet.cefas.co.uk/Smartbuoy/Map>CEFAS SmartBuoys</a></li>",
               "</ul>")
             )
           )

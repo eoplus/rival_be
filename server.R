@@ -1,3 +1,5 @@
+Sys.setenv(TZ = 'UTC')
+
 library(ggvis)
 library(dplyr)
 
@@ -53,7 +55,8 @@ function(input, output, session) {
       datasource <- switch(input$olci_dtst,
                            "LifeWatch BE" = "lw_st_be",
                            "BMDC" = "bmdc_st_be",
-                           "AERONET-OC" = "aeronetoc_be"
+                           "AERONET-OC" = "aeronetoc_be",
+                           "CEFAS SmartBuoys" = "cefasbuoy_uk"
                     )
       m <- m %>% filter(Dataset == datasource)
     }
@@ -81,7 +84,11 @@ function(input, output, session) {
 
     # Pick out the data point with this ID
     all_matchups <- isolate(olci_matchups())
-    matchup <- all_matchups[all_matchups$ID == x$ID, ]
+    matchup      <- all_matchups[all_matchups$ID == x$ID, ]
+
+    visn <- paste(matchup$Station, format(matchup$Time, "%H%M%S"), 
+            matchup$olci_tile, sep = "_") %>%
+            paste0(., ".png")
 
     paste0("<b>", paste(matchup$Dataset, matchup$Station, sep = ": "), "</b><br>",
       matchup$olci_time, "<br>",
@@ -91,7 +98,8 @@ function(input, output, session) {
         round(matchup$olci_Rrs865_er, 4), " sr<br>"),
       paste0("VZA: ", round(matchup$olci_oza, 2), "°<br>"),
       paste0("SZA: ", round(matchup$olci_sza, 2), "°<br>"),
-      matchup$olci_tile
+      matchup$olci_tile,
+      tags$p(tags$img(height = 300, width = 300, src = visn))
     )
   }
 
